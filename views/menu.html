@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Router App Dashboard
+    </title>
+
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script  src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
+    <script  src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+   
+</head>
+<body>
+        <style type="text/css">
+	
+	  #map {
+            height: 300px;
+            width: 400px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the sidenav links and the dropdown button */
+        .sidenav a, .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #818181;
+            display: block;
+            border: none;
+            background:#761c19;
+            width:100%;
+            text-align: left;
+            cursor: pointer;
+            outline:lawngreen;
+        }
+        
+        .dropdown-btn{
+            font-size: 16px;
+        }
+        /* On mouse-over */
+        .sidenav a:hover, .dropdown-btn:hover {
+            color: #f1f1f1;
+        }
+
+        /* Add an active class to the active dropdown button */
+        .active {background-color: green;}
+
+        li {list-style-type: none; }
+        .sidemenu {
+            height: 100%; /* Full-height: remove this if you want "auto" height */
+            width: 160px; /* Set the width of the sidebar */
+            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+            z-index: 1; /* Stay on top */
+            top: 1px; /* Stay at the top */
+            left: 0;
+            background-color:white;
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top:20px;
+        }
+        .menu{
+            background-color: black;
+        }
+        .sub-menu{
+            background-color: #761c19;
+        }
+        /* The navigation menu links */
+        .sidemenu a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            color: #818181;
+            display: block;
+        }
+        .anyClass {
+                height:500px;
+                overflow-y: visible!important;
+                overflow-x: scroll!important;
+                 }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidemenu a:hover {
+            color: #f1f1f1;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidemenu {padding-top: 15px;}
+            .sidemenu a {font-size: 18px;}
+        }
+        
+        }
+        
+        .example-1 {
+        position: relative;
+        overflow-y: scroll;
+        overflow-x: scroll;
+        height: 450px; }
+        
+        
+    </style>
+<div class="container-fluid">
+    <nav class="navbar navbar-inverse" style=" position: fixed;width:87.2%;margin-left:11%" >
+        <div class="navbar-header">
+            <a class="navbar-brand active" href="#">Router Dashboard</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/profile" class="glyphicon-user nav-link">Profile</a></li>
+            <li><a href="/customers" class="nav-link">App Clients</a></li>
+            <li><a href="/customerTopUps" class="nav-link">Wallet TopUps</a></li>
+            <li><a href="/appfares" class="nav-link">Set Fares Per KM & Traffic</a></li>
+        </ul>
+        <form class="navbar-form navbar-right" action="/action_page.php">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </nav>
+<div class="sidemenu">
+    <img src="images/logo.jpg" width="100%" height="15%" >
+                <h3>App Services</h3> 
+<div class="menu" style="margin-left:-4.8%">
+   <ul class="nav-menu" style="margin-left:-26%">
+      <li class="main-list"><a href="#">Boda Boda</a>
+     <div class="square">
+        <div class="sub">
+         <ul class="sub-menu" style="margin-left:-23%">
+            <li><a href="/dashboard-home">Manage Agent</a></li>
+            <li><a href="/bodasonline">Bodas Online</a></li>
+            <li> <a href="/bodasworking">Bodas Working</a></li>
+            <li><a href="/incomingBodaRequests">Incoming Requests</a></li>
+            <li><a href="/allBodaTrips">All Boda Trips</a></li>
+            <li><a href="bodaPayments">Payments</a></li>
+          </ul>
+         </div>
+        </div>
+      </li>
+      <li class="main-list"><a href="#">Taxi</a>
+          <div class="square">
+            <div class="sub">
+                <ul class="sub-menu" style="margin-left:-23%">
+                   <li><a href="/taxi">Manage Agent</a></li>
+                   <li><a href="/driversonline">Drivers Online</a></li>
+                   <li><a href="/driversworking">Drivers Working</a></li>
+                   <li><a href="/incomingDriverRequests">Incoming Requests</a></li>
+                   <li><a href="/allDriverTrips">All Driver Trips</a></li>
+                   <li><a href="/driverPayments">Payments</a></li>
+                </ul>
+            </div>
+        </div>
+      </li>
+      <li class="main-list"><a href="#">Delivery</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                        <li><a href="/delivery">Manage Agent</a></li>
+                        <li><a href="/deliveryagentsonline">Agents Online</a></li>
+                       <li> <a href="/deliveryagentsworking">Agents Working</a></li>
+                        <li><a href="/incomingDeliveryRequests">Incoming Requests</a></li>
+                        <li><a href="/allDeliveryTrips">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Car Renting</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">       
+                        <li><a href="/carrental">Manage Agent</a></li>
+                        <li><a href="/carrentalAgentsonline">Agents Online</a></li>
+                        <li><a href="/carrentalAgentsworking">Agents Working</a></li>
+                        <li><a href="/incomingcarrentalRequests">Incoming Requests</a></li>
+                       <li> <a href="/allcarrentalServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      <li class="main-list"><a href="#">Cleaning</a>
+          <div class="square">
+            <div class="sub">
+              <ul class="sub-menu" style="margin-left:-23%">
+                        <li><a href="/cleaning">Manage Agent</a></li>
+                       <li> <a href="/cleaningAgentsonline">Agents Online</a></li>
+                       <li> <a href="/cleaningAgentsworking">Agents Working</a></li>
+                        <li><a href="/incomingcleaningRequests">Incoming Requests</a></li>
+                        <li><a href="/allcleaningServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      <li class="main-list"><a href="#">Doctors</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                      <li> <a href="/doctors">Manage Agent</a></li>
+                       <li><a href="/doctorsonline">Agents Online</a></li>
+                       <li> <a href="/doctorsworking">Agents Working</a></li>
+                       <li> <a href="/incomingdoctorRequests">Incoming Requests</a></li>
+                       <li> <a href="/alldoctorsServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Electricians</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                        <li><a href="/electricians">Manage Agent</a></li>
+                        <li><a href="/electriciansonline">Agents Online</a></li>
+                        <li><a href="/electriciansworking">Agents Working</a></li>
+                        <li><a href="/incomingElectriciansRequests">Incoming Requests</a></li>
+                        <li><a href="/allelectricianServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Fumigation</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                      <li><a href="/fumigation">Manage Agent</a></li>
+                      <li> <a href="/fumigationAgentsonline">Agents Online</a></li>
+                      <li><a href="/fumigationAgentsworking">Agents Working</a></li>
+                      <li> <a href="/fumigationincomingRequests">Incoming Requests</a></li>
+                      <li> <a href="/fumigationallAgentsServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Gas Refill</a>
+          <div class="square">
+            <div class="sub">
+              <ul class="sub-menu" style="margin-left:-23%">
+                      <li> <a href="/gasrefill">Manage Agent</a></li>
+                        <li><a href="/gasAgentsonline">Agents Online</a></li>
+                        <li><a href="/gasAgentsworking">Agents Working</a></li>
+                        <li><a href="/gasincomingRequests">Incoming Requests</a></li>
+                        <li><a href="/gasallAgentsServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Massage</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                       <li> <a href="/massage">Manage Agent</a></li>
+                        <li><a href="/massageAgentsonline">Agents Online</a></li>
+                        <li><a href="/massageAgentsworking">Agents Working</a></li>
+                        <li><a href="/massageincomingRequests">Incoming Requests</a></li>
+                       <li> <a href="/massageallAgentsServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Plumbing</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                      <li>  <a href="/plumbing">Manage Agent</a></li>
+                       <li> <a href="/plumbingAgentsonline">Agents Online</a></li>
+                       <li> <a href="/plumbingAgentsworking">Agents Working</a></li>
+                      <li>  <a href="/plumbingincomingRequests">Incoming Requests</a></li>
+                        <li><a href="/plumbingallAgentsServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Salon</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                     <li>  <a href="/salon">Manage Agent</a></li>
+                       <li> <a href="/salonAgentsonline">Agents Online</a></li>
+                       <li> <a href="/salonAgentsworking">Agents Working</a></li>
+                       <li> <a href="/salonincomingRequests">Incoming Requests</a></li>
+                        <li><a href="/salonallAgentsServiceHistory">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+      <li class="main-list"><a href="#">Mechanics</a>
+          <div class="square">
+            <div class="sub">
+               <ul class="sub-menu" style="margin-left:-23%">
+                         <li><a href="/mechanics">Manage Agent</a></li>
+                        <li><a href="/mechanicsAgentsonline">Agents Online</a></li>
+                       <li> <a href="/mechanicsAgentsworking">Agents Working</a></li>
+                       <li> <a href="/mechanicsincomingRequests">Incoming Requests</a></li>
+                       <li> <a href="/allmechanicServices">All Agents Trips</a></li>
+              </ul>
+            </div>
+        </div>
+      </li>
+      
+    </ul>
+    </div>
+</div>
+</div> 
+<script type="text/javascript" >
+$('.sub-menu').hide();
+$("li:has(ul)").click(function(){
+  $(".main-list").find('.sub-menu').slideUp();
+  $(this).find('.sub-menu').slideDown();
+  
+  
+  
+});
+</script>
+<script src="/js/firebase.js"></script>
+<script src="/js/database.js"></script>
+</body>
+</html>

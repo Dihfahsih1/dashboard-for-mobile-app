@@ -1,0 +1,53 @@
+<% include ../menu.html %>
+    <div style="overflow-y:-moz-scrollbars-vertical;margin-left: 160px;padding:6px 8px 6px 16px;"><br><br>
+    
+                    <div class="col-sm-6" >
+                          <h3>Boda Agent payments</h3>
+                        
+            <table class="table table-hover" border="2">
+                <thead class="thead-dark">
+           
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h4>    Name: <%= riderobject.userName %></h4></td>
+                        <td><h4>    Phone: <%= riderobject.phone %></h4></td>
+                        <td> <h4>    Wallet Balance: <%= riderobject.walletBalance%></h4></td>
+                        <td><h4>    Helment Number: <%= riderobject.helMentNo%></h4></td>
+                    </tr>
+                    <tr>
+                       <td>
+                              <form action='/payRiders/'  method='post' name='form1'>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Amount to pay</label>
+                            <input type="text" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="1000" name="amount">
+                          </div>
+                           <div class="form-group" style="display:none">
+                            <label for="exampleInputPassword1">Rider Id(Dont Edit)</label>
+                            <input onkeydown="return false" type="text" class="form-control form-control-lg" value="<%= id %>" id="exampleInputPassword1" placeholder="Amount" name="id">
+                          </div>
+                        
+                         <button type="submit" class="btn btn-primary" value='submit'>Finish payment</button>
+                        </form>
+                           
+                       </td>
+
+
+                    </tr>
+                    </tbody>
+                    </table>
+                    </div>
+
+                         
+         
+                  
+
+
+                                                  
+                                        
+                                
+                             
+    </div>
+
+ 
+

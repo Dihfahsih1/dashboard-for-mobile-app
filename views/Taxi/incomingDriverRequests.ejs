@@ -1,0 +1,33 @@
+<% include ../menu.html %>
+<div style="margin-left: 160px;padding:6px 8px 6px 16px;"><br><br>
+                <div class="page-header"><h3>Incoming Clients Requests For Taxi</h3></div>
+                <div class="col-lg-9 anyClass">
+            <div class="card example-1">
+             <div class="card-body">
+                <% var keys=Object.keys(driverrequests)%>
+                Total Requests: <%= size %>
+            <table class="table" border="2">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Client Contact</th>
+                    <th>View Request Location</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 <% keys.forEach(function(agent){ %>
+                    <tr onmouseover="{ viewTaxiClientLocation('<%= agent %>') }">
+                            <td><%= driverrequests[agent].customerPhone %></td>
+                            <td><button class="btn btn-primary"onclick="{ viewTaxiClientLocation('<%= agent %>') }">View Request Location</button></td>
+                    </tr>
+                  <% })%>
+                </tbody>
+             </table>
+             </div></div></div>
+             <div class="col-lg-3">
+                     <h3>Request Location</h3>
+                        <div id="map">
+                        </div>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNtTpw_MrAdwrPlXGTlVVS5BjH5xZeh50&callback=initMap"
+                        async defer></script>
+             </div>
+      </div>

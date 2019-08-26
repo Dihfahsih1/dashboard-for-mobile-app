@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        html{
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="col-lg-6  border border-warning p-2 mb-4 bg-default text-black"  style="margin-left:350px;">
+        <img src="images/logo.jpg" width="100%" height="15%" >
+     <h3 class="text-center">Router Admin Login</h3>
+     <% if(message.length > 0){ %>
+        <div class="alert alert-danger"><%=message%></div>
+        <% }%>
+        <form action="/" method="post">
+          <div class="form-group">
+              <label> Username</label>
+              <input type="text" class="form-control" name="username">
+          </div>
+            <div class="form-group">
+                <label> Password</label>
+                <input type="text" class="form-control" name="password">
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Login</button>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>

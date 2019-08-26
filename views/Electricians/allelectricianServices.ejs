@@ -1,0 +1,43 @@
+<% include ../menu.html %>
+<div style="margin-left: 160px;padding:6px 8px 6px 16px;"><br><br>
+
+    <div class="col-lg-9">
+        <div class="page-header"><h3> All Electrician Services</h3></div>
+        <% var keys=Object.keys(allelectricianServices)  %>
+        
+        <div class="card example-1 square scrollbar-dusty-grass square thin">
+      <div class="card-body anyClass">
+        <table class="table table-hover" border="2">
+            <thead class="thead-dark">
+            <tr>
+                <th>Total</th>
+                <th><p><%= size %></p></th>
+            </tr>
+            <tr>
+                <th>Service Charge</th>
+                <th>Service point</th>
+                <th>Rating</th>
+                <th >Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% keys.forEach(function(agent){ %>
+                <tr onmouseover="{ getElectricianCustomerandAgent('<%= allelectricianServices[agent].customer %>','<%= allelectricianServices[agent].Electrician %>') }">
+                    <td><%= allelectricianServices[agent].serviceFee %></td>
+                    <td><%= allelectricianServices[agent].servicepoint %></td>
+                    <td><%= allelectricianServices[agent].rating %></td>
+                    <% var date = new Date(allelectricianServices[agent].timestamp*1000) %>
+                    <td><%= date %></td>
+                </tr>
+            <% })%>
+            </tbody>
+        </table>
+    </div></div></div>
+    <div class="col-lg-3">
+        <h3>Agent & Customer Details</h3>
+        <h5 id='riderName'></h5>
+        <h5 id='riderPhone'></h5>
+        <img id="riderImage" height="100" width="100"/>
+        <h5 id='customerPhone'></h5>
+    </div>
+</div>

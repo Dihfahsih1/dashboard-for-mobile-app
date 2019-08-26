@@ -1,0 +1,134 @@
+<% include ../menu.html %>
+    <div style="margin-left: 160px;padding:6px 8px 6px 16px;"><br><br>
+                          <div class="page-header"><h1>Manage Router Fares</h1></div>
+                          <div class="col-lg-10 anyClass" >
+                           <div class="card example-1">
+                              <div class="card-body">
+         
+                            <table class="table table-hover" border="2">
+                                    <thead class="thead-dark">
+                                    
+                                        <tr>
+                                        <th scope="col">Module</th>   
+                                        <th scope="col">Base Fare</th> 
+                                        <th scope="col">Distance Fare</th>
+                                        <th scope="col">Time Fare</th>
+                                        <th scope="col">Traffic Charge</th>
+                                        <th scope="col">Cash Fine</th>
+                                        <th scope="col">Minimum Charge</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                                        <tr>
+                                            <td>Taxi</td>
+                                            <td><%= fareobject.taxiBase %> UGX</td>
+                                            <td><%= fareobject.taxiperkilometre %> UGX</td>
+                                            <td><%= fareobject.taxiperminute %> UGX</td>
+                                            <td><%= fareobject.taxiTrafficHighAmount %> UGX</td>
+                                            <td><%= fareobject.taxiCashFine %> UGX</td>
+                                            <td><%= fareobject.taxiMinimumCharge %> UGX</td>
+                                        
+                                        </tr>
+                                        <tr>
+                                            <td>Boda</td>
+                                            <td><%= fareobject.bodaBase %> UGX</td>
+                                            <td><%= fareobject.bodaperkilometre %> UGX</td>
+                                            <td><%= fareobject.bodaperminute %> UGX</td>
+                                             <td><%= fareobject.bodatrafficHighAmount %> UGX</td>
+                                             <td><%= fareobject.bodaCashFine %> UGX</td>
+                                             <td><%= fareobject.bodaMinimumCharge %> UGX</td>
+                                        </tr>
+                                          <tr>
+                                              <td>
+                                             <button style='margin-top:5px' class="btn btn-primary" onclick="{showPaymentMethods()}">Change Fare or Traffic</button>
+                                                <div id="myModal" class="modal">
+                                                        <!-- Modal content -->
+                                                        <div class="modal-content">
+                                                                <span class="close">&times;</span>
+                                                            <h3>Select what to update</h3>
+                                                          <select class="form-control" style="margin-bottom:10px;" id="selectedChangeValue">
+                                                              <option value="TaxiBaseFare">Taxi Base Fare</option>
+                                                              <option value="TaxiFareperkilometer">Taxi Fare per kilometer</option>
+                                                              <option value="TaxiFareperminute">Taxi Fare per minute</option>
+                                                              <option value="TaxiTrafficMode">Taxi Traffic Mode</option>
+                                                              <option value="TaxiCashFine">Taxi Cash Fine</option>
+                                                              <option value="TaxiTrafficFee">Taxi Traffic Fee</option>
+                                                              <option value="taxiPriceRange">Taxi Price Range</option>
+                                                              <option value="taxiDistanceFine">Taxi Distance Fine</option>
+                                                              <option value="taxiMinimumCharge">Taxi Minimum Charge</option>
+
+                                                              
+
+
+                                                              <option value="BodaBaseFare">Boda Base Fare</option>
+                                                              <option value="BodaFareperkilometer">Boda Fare per kilometer</option>
+                                                              <option value="BodaFareperminute">Boda Fare per minute</option>
+                                                              <option value="BodaTrafficMode">Boda Traffic Mode</option>
+                                                              <option value="BodaCashFine">Boda Cash Fine</option>
+                                                              <option value="BodaTrafficFee">Boda Traffic Fee</option>
+                                                              <option value="bodaPriceRange">Boda Price Range</option>
+                                                              <option value="bodadistanceFine">Boda Distance Fine</option>
+                                                              <option value="bodaMinimumCharge">Boda Minimum Charge</option>
+
+
+
+                                                              <option value="OtherServicesCharge">Other Services Charge</option>
+                                                              
+                                                              <option value="agentProfitPercentage">Agent Profit Percentage</option>
+                                                              <option value="companyProfitPercentage">Company Profit Percentage</option>
+
+                                                              
+
+                                                              
+                                                              
+                                                          </select>
+                                                            <input style='margin-top:5px' class="form-control"  id='changedValue'  placeholder="value" >
+                                                            <button style='margin-top:5px' class="btn btn-primary" onclick="{ changeTrafficValues()}">Confirm Changes</button>
+                                                        </div>
+
+                                                      </div>
+                                        </td>
+                                        <td>Other Services charge: <%= fareobject.servicesCharges %> UGX</td>
+                                        </tr>
+
+                                    </tbody>
+                            </table>
+
+                            <h3>Traffic control & More</h3>
+                            <table class="table table-hover" border="2">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">Traffic Mode(normal or high)</th>   
+                                        <th scope="col">Distance Fine</th>
+                                        <th scope="col">Price Range</th>
+                                        <th>Profit Percentages(Agent & Company)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Taxi</td>
+                                            <td><%= fareobject.taxiTrafficMode %></td>
+                                            <td><%= fareobject.taxiDistanceFine %></td>
+                                            <td><%= fareobject.taxiPriceRange %></td>
+                                            <td>Agent Profit %: <%= fareobject.agentProfitPercentage %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Boda</td>
+                                            <td><%= fareobject.bodaTrafficMode %></td>
+                                            <td><%= fareobject.bodadistanceFine %></td>
+                                            <td><%= fareobject.bodaPriceRange %></td>
+                                            <td>Company Profit %: <%= fareobject.companyProfitPercentage %></td>
+
+                                        </tr>
+                                    </tbody>
+                            </table>            
+                          </div>          
+                         </div>
+                        </div>
+                             
+                    </div>
+
+ 
+

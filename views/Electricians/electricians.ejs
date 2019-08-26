@@ -1,0 +1,50 @@
+<% include ../menu.html %>
+<div style="margin-left: 160px;padding:6px 8px 6px 16px;"><br><br>
+<div class="col-lg-10">
+    <div class="page-header"><h3> Welcome to Electrician Panel</h3></div>
+    <div class="card example-1 square scrollbar-dusty-grass square thin">
+               <div class="card-body anyClass">
+        <% var keys=Object.keys(electricians)  %>
+        <table class="table table-hover" border="2">
+            <thead class="thead-dark">
+            <tr>
+                <th>Total: <%= size %></th>
+            </tr>
+            <tr>
+                <th>UserName</th>
+                <th>Phone</th>
+                <th>Account Status</th>
+                <th>Wallet Balance</th>
+                <th>Profile Pic</th>
+                <th>Nationl ID</th>
+                <th>Working Certificate</th>
+                <th>Approve</th>
+                <th>Deactivate</th>
+                <th>Reject</th>
+                <th>Trips</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% keys.forEach(function(agent){ %>
+                <tr onmouseover="{ GetElectricianRating('<%= agent %>') }">
+                    <td><%= electricians[agent].userName %></td>
+                    <td><%= electricians[agent].phone %></td>
+                    <td><%= electricians[agent].accountStatus %></td>
+                    <td><%= electricians[agent].walletBalance %> UGX</td>
+                    <td><a target="_blank" href="<%= electricians[agent].profilePic %>"><img height="30" width="30" src="<%= electricians[agent].profilePic %>"/></a></td>
+                    <td><a target="_blank" href="<%= electricians[agent].NationalIDPic %>"><img height="30" width="30" src="<%= electricians[agent].NationalIDPic %>"/></a></td>
+                    <td><a target="_blank" href="<%= electricians[agent].WorkingCertificate %>"><img height="30" width="30" src="<%= electricians[agent].WorkingCertificate %>"/></a></td>
+                    <td><button style='margin-top:5px' class="btn btn-primary"onclick="{ approveElectrician('<%= agent %>') }" id='approveButton'>Approve</button></td>
+                    <td> <button style='margin-top:5px' class="btn btn-primary"onclick="{ deactivateElectrician('<%= agent %>') }" id='deactivateButton'>Deactivate</button></td>
+                    <td><button style='margin-top:5px' class="btn btn-primary"  onclick="{ rejectElectrician('<%= agent %>') }" id='rejectButton'>reject</button></td>
+                    <td><a href="/viewSingleElectricianServiceHistory/<%= agent %>/"><button class="btn btn-primary"  id='singleTripsButton'> History</button>  </a></td>
+                </tr>
+            <% })%>
+            </tbody>
+        </table>
+    </div></div></div>
+     <div class="col-lg-2">
+             <h1>Rating</h1>
+             <h1 id=rating></h1>
+        </div>
+</div>

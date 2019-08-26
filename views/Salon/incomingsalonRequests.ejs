@@ -1,0 +1,41 @@
+<% include ../menu.html %>
+<div style="margin-left: 160px;padding:6px 8px 6px 16px;"><br><br>
+ <div class="page-header"><h3> Incoming Requests for Salon Agents</h3></div>
+    <div class="col-lg-8">
+        <div class="card example-1">
+            <div class="card-body">
+        <table class="table table-hover" border="2">
+        <% var keys=Object.keys(requests)%>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Total</th>
+                <th scope="col"><p><%= size %></p></th>
+            </tr>
+            <tr>
+                <th scope="col">Service Charge</th>
+                <th scope="col">Service point</th>
+                <th scope="col">Rating</th>
+                <th scope="col" >Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% keys.forEach(function(agent){ %>
+                <tr onmouseover="{ getSalonCustomerandAgent('<%= services[agent].customer %>','<%= services[agent].SalonAgent %>') }">
+                    <td><%= services[agent].serviceFee %></td>
+                    <td><%= services[agent].servicepoint %></td>
+                    <td><%= services[agent].rating %></td>
+                    <% var date = new Date(services[agent].timestamp*1000) %>
+                    <td><%= date %></td>
+                </tr>
+            <% })%>
+            </tbody>
+        </table>
+    </div></div></div>
+    <div class="col-lg-4">
+        <b>Agent & Customer Details</b>
+        <h5 id='riderName'></h5>
+        <h5 id='riderPhone'></h5>
+        <img id="riderImage" height="100" width="100"/>
+        <h5 id='customerPhone'></h5>
+    </div>
+</div>

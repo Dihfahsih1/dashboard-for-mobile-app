@@ -1,0 +1,49 @@
+<% include ../menu.html %>
+<div style="overflow-y:-moz-scrollbars-vertical;margin-left: 160px;padding:6px 8px 6px 16px;"><br><br>
+       <div class="page-header"><h3>Driver Trips Details</h3></div>
+                            
+                            <div class="col-md-8">
+                                    <% var keys=Object.keys(historyobjects)  %>
+
+                                            <table class="table table-hover" border="2">
+                                                    <thead class="thead-dark">
+                                                    <tr>
+                                                            <th>Total Trips: <%= size %></th> 
+                                                    </tr>
+                                                      <tr>
+                                                        <th>PickUp</th> 
+                                                        <th>Total Cost</th>
+                                                        <th>Destination</th>
+                                                        <th>Distance</th>
+                                                        <th>Time</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                 <% keys.forEach(function(agent){ %>
+                                                       <tr id=""  onmouseover="{ getTaxiRideCustomerandDriver('<%= historyobjects[agent].customer %>','<%= historyobjects[agent].driver %>') }">
+                                                        <td><%= historyobjects[agent].PickUp %></td>
+                                                        <td><%= historyobjects[agent].TotalCost %></td>
+                                                        <td><%= historyobjects[agent].destination %></td>
+                                                        <td><%= historyobjects[agent].distance %></td>
+                                                        <% var date = new Date(historyobjects[agent].timestamp*1000) %>
+                                                        <td><%= date %></td>
+                                                       </tr>
+                                                       <% })%> 
+
+                                                    </tbody>
+                                                  </table>
+
+                                            
+                             </div>
+                             <div class="col-md-4">
+                                 <h3>Driver & Customer Details</h3>
+                                 <h5 id='riderName'></h5>
+                                 <h5 id='riderPhone'></h5>
+                                 <h5 id='riderHelment'></h5>
+                                 <img id="riderImage" height="100" width="100"/>
+                                 <h5 id='customerPhone'></h5>
+
+
+                             </div>
+
+                    </div>
